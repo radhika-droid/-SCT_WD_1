@@ -1,0 +1,331 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.calculator {
+    background: linear-gradient(145deg, #0f0f23, #1a1a2e);
+    border: 2px solid #00ffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(0, 255, 255, 0.3);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.calculator.shift-mode {
+    border-color: #ff0080;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(255, 0, 128, 0.3);
+}
+
+.calculator::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 50px;
+    height: 6px;
+    background: linear-gradient(90deg, #ff0080, #00ffff, #8000ff);
+    border-radius: 4px;
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% { opacity: 0.9; }
+    100% { opacity: 1; box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+}
+
+.brand {
+    text-align: center;
+    color: #00ffff;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #00ffff;
+    transition: all 0.3s ease;
+}
+
+.calculator.shift-mode .brand {
+    color: #ff0080;
+    text-shadow: 0 0 15px #ff0080;
+}
+
+.calculator.shift-mode .brand::after {
+    content: " - SCIENTIFIC MODE";
+    font-size: 0.6rem;
+    display: block;
+    margin-top: 2px;
+}
+
+.display-section {
+    background: #000000;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+}
+
+.calculator.shift-mode .display-section {
+    border-color: #ff0080;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 0, 128, 0.3);
+}
+
+.history {
+    height: 20px;
+    background: transparent;
+    border: none;
+    color: #ff0080;
+    font-size: 0.7rem;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 5px;
+    outline: none;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 5px #ff0080;
+}
+
+#display {
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: #00ffff;
+    outline: none;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 12px #00ffff;
+}
+
+.mode-display {
+    display: none;
+    text-align: center;
+    color: #ffff00;
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px #ffff00;
+}
+
+.calculator.shift-mode .mode-display {
+    display: block;
+}
+
+.memory-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.mem-btn {
+    height: 30px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #2a2a2a, #0a0a0a);
+    color: #ffff00;
+    border: 1px solid #ffff00;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px #ffff00;
+}
+
+.mem-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(255, 255, 0, 0.4);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* Scientific functions panel - appears above main buttons when shift is active */
+.scientific-panel {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 2px solid #8000ff;
+    border-radius: 10px;
+}
+
+.calculator.shift-mode .scientific-panel {
+    display: grid;
+}
+
+button {
+    height: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    border: 2px solid;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px currentColor;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.btn {
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    color: #ffffff;
+    border-color: #4a5568;
+}
+
+.btn:hover {
+    color: #00ffff;
+    border-color: #00ffff;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+}
+
+.operator {
+    background: linear-gradient(145deg, #ff0080, #cc0066);
+    color: white;
+    border-color: #ff0080;
+    font-weight: 900;
+    font-size: 1.3rem;
+}
+
+.operator:hover {
+    box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
+}
+
+#equals {
+    grid-column: span 2;
+    background: linear-gradient(145deg, #00ff00, #00cc00);
+    color: white;
+    font-weight: 900;
+    font-size: 1.5rem;
+    border-color: #00ff00;
+}
+
+#equals:hover {
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+}
+
+#clear {
+    background: linear-gradient(145deg, #ff4444, #cc0000);
+    color: white;
+    font-weight: 900;
+    border-color: #ff4444;
+}
+
+#clear:hover {
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+}
+
+.special {
+    background: linear-gradient(145deg, #8000ff, #6600cc);
+    color: white;
+    font-size: 1rem;
+    border-color: #8000ff;
+}
+
+.special:hover {
+    box-shadow: 0 4px 15px rgba(128, 0, 255, 0.4);
+}
+
+.scientific {
+    background: linear-gradient(145deg, #4a90e2, #357abd);
+    color: white;
+    border-color: #4a90e2;
+    font-size: 0.8rem;
+    height: 40px;
+}
+
+.scientific:hover {
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+}
+
+#zero {
+    grid-column: span 2;
+}
+
+.decimal {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.shift-btn {
+    background: linear-gradient(145deg, #ff8c00, #ff6600);
+    color: white;
+    border-color: #ff8c00;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.shift-btn:hover {
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+}
+
+.shift-btn.active {
+    background: linear-gradient(145deg, #ffaa00, #ff8800);
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    button {
+        height: 45px;
+        font-size: 0.9rem;
+    }
+    
+    .scientific {
+        height: 35px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .calculator {
+        max-width: 450px;
+    }
+}

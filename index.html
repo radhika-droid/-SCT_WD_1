@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Calculator</title>
+    <link rel="stylesheet" href="style.css">
+ 
+<body>
+    <div class="calculator" id="calculator">
+        <div class="brand">Neural Edition</div>
+        
+        <div class="mode-display" id="modeDisplay">
+            ANGLE MODE: <span id="angleMode">DEG</span> | MEMORY: <span id="memoryIndicator">0</span>
+        </div>
+        
+        <div class="display-section">
+            <input type="text" class="history" id="history" disabled>
+            <input type="text" id="display" value="0" disabled>
+        </div>
+
+        <div class="memory-buttons">
+            <button class="mem-btn" id="mc">MC</button>
+            <button class="mem-btn" id="mr">MR</button>
+            <button class="mem-btn" id="mplus">M+</button>
+            <button class="mem-btn" id="mminus">M−</button>
+        </div>
+
+        <!-- Scientific functions panel - shows when SHIFT is pressed -->
+        <div class="scientific-panel" id="scientificPanel">
+            <button class="scientific" data-func="sin">sin</button>
+            <button class="scientific" data-func="cos">cos</button>
+            <button class="scientific" data-func="tan">tan</button>
+            <button class="scientific" id="angleToggle">DEG/RAD</button>
+            
+            <button class="scientific" data-func="asin">asin</button>
+            <button class="scientific" data-func="acos">acos</button>
+            <button class="scientific" data-func="atan">atan</button>
+            <button class="scientific" data-func="ln">ln</button>
+            
+            <button class="scientific" data-func="log">log</button>
+            <button class="scientific" data-func="sqrt">√</button>
+            <button class="scientific" data-func="square">x²</button>
+            <button class="scientific" data-func="power">x^y</button>
+            
+            <button class="scientific" data-func="reciprocal">1/x</button>
+            <button class="scientific" data-func="factorial">x!</button>
+            <button class="scientific" data-func="pi">π</button>
+            <button class="scientific" data-func="e">e</button>
+        </div>
+
+        <div class="buttons" id="buttonsGrid">
+            <button id="clear">AC</button>
+            <button class="shift-btn" id="shift">SHIFT</button>
+            <button class="btn special" data-value="(" data-display="(">(</button>
+            <button class="btn special" data-value=")" data-display=")">)</button>
+
+            <button class="btn" data-value="7">7</button>
+            <button class="btn" data-value="8">8</button>
+            <button class="btn" data-value="9">9</button>
+            <button class="operator" data-value="/" data-display="÷">÷</button>
+
+            <button class="btn" data-value="4">4</button>
+            <button class="btn" data-value="5">5</button>
+            <button class="btn" data-value="6">6</button>
+            <button class="operator" data-value="*" data-display="×">×</button>
+
+            <button class="btn" data-value="1">1</button>
+            <button class="btn" data-value="2">2</button>
+            <button class="btn" data-value="3">3</button>
+            <button class="operator" data-value="-" data-display="−">−</button>
+
+            <button class="btn" data-value="0" id="zero">0</button>
+            <button class="btn decimal" data-value="." data-display=".">.</button>
+            <button class="operator" data-value="+" data-display="+">+</button>
+            <button id="equals">=</button>
+        </div>
+    </div>
+
+  
+</body>
+<script src="script.js"></script>
+</html>
